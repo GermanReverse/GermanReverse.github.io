@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+    background: url('https://wallpapers.com/images/hd/cute-simple-christmas-qaq7kvsxz8b81gug.jpg') repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .text-box {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        h3 {
+            color: black;
+        }
+        .gift-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff4081, #f50057);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gift-box::before, .gift-box::after {
+            content: '';
+            position: absolute;
+            background: #ffeb3b;
+        }
+        .gift-box::before {
+            width: 20px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .gift-box::after {
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .gift-lid {
+            width: 170px;
+            height: 50px;
+            background: linear-gradient(135deg, #c51162, #d500f9);
+            border-radius: 5px;
+            position: absolute;
+            top: -50px;
+            left: -10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease;
+        }
+        .gift-bow {
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.4s ease;
+        }
+        .gift-bow .ribbon {
+            width: 50px;
+            height: 20px;
+            background: linear-gradient(135deg, #ff4081, #f50057);
+            border-radius: 5px;
+            position: relative;
+        }
+        .gift-bow .ribbon::before, .gift-bow .ribbon::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #c51162, #d500f9);
+            border-radius: 50%;
+        }
+        .gift-bow .ribbon::before {
+            top: -10px;
+            left: -15px;
+        }
+        .gift-bow .ribbon::after {
+            top: -10px;
+            right: -15px;
+        }
+        .gift-box.open .gift-lid {
+            transform: translateY(-100px);
+        }
+        .gift-box.open .gift-bow {
+            transform: translate(-50%, -100px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-box">
+            <h3>Presiona varias veces el regalo para abrirlo!</h3>
+        </div>
+        <div>
+            <h2>&nbsp;</h2>
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="gift-container">
+            <div id="gift" class="gift-box">
+                <div class="gift-lid"></div>
+                <div class="gift-bow">
+                    <div class="ribbon"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let clickCount = 0;
+        const giftBox = document.getElementById('gift');
+
+        giftBox.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount >= 4) {
+                giftBox.classList.add('open');
+                setTimeout(() => {
+                    Swal.fire({
+                        title: '¡Feliz Navidad!🎄',
+                        html: '<p>Querida Alex,<br>Espero que esta Navidad esté llena de alegrías y bendiciones para ti y tu familia. ya casi se acaba el año y no puedo creer que ya llevemos mas de 2 años de amistad JSJASJSJASJ, como sea... lo unico que puedo decir es gracias por ser mi amiga... creo que hablarte esa ves fue una de las mejores decisiones que eh tomado y que no haya dia que no me arrepienta de ser tu amigo, si bien solo charlamos, hablar contigo es una de mis pasatiempos favoritos y no lo cambiaria por nada jajajs, solo queria desearte una feliz navidad y espero que esta amistad siga por los años siguientes, mi regalo fue esta cartita, no es mucho pero queria expresar lo feliz que estoy de tenerte en mi vida, se que siempre te lo digo pero estoy orgulloso que estoy de ti si se puede decirse asi, para mi siempre seras mi dibujante favorita, mi mejor amiga y una de las personas con las que tengo la confianza de decir como me siento, se que el proximo año te ira mucho mejor que este y espero que te pasen cosas buenas y mas locas que este año porque te lo mereces alex, aunque esta dificil por las cosas que me dices y cuentas sobre tu loca vida de pelicula jsjsj, prometo siempre estar ahi para ti y si alguna ves nos peleamos, prometo arreglarlo JAJASJSJ<br><br>Te quiero tonta, feliz navidad</p>',
+                        iconHtml: '❤️',
+                        customClass: {
+                            icon: 'custom-heart-icon'
+                        },
+                        confirmButtonText: 'Cerrar',
+                        confirmButtonColor: '#e91e63'
+                    });
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
+
